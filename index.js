@@ -25,40 +25,40 @@ const server = express();
 //-----------------------------------------------------
 //general middleware
 
-/* const handleAllRequest = (req, res, next) => {
+const middlewareFunction= (req, res, next) => {
     res.send('<h1>this is a general middleware</h1>');
     next();
-} */
+}
 
 //route specific middleware
 
-const handleLoginRequest = (req, res, next) => {
+const loginRouteSpecificMiddleware = (req, res, next) => {
     console.log('this is a route specific middleware that calls the handleGetLoginRequest request handler for the login route');
     next();
 }
 
-const handlePostRequest = (req, res, next) => {
+const signupRouteSpecificMiddleware = (req, res, next) => {
     console.log('this is a route specific middleware that calls the handlePostSignUpRequest request handler for the signup route');
     next();
 }
 
-const handlePatchRequest = (req, res, next) => {
+const profileRouteSpecificMiddleware = (req, res, next) => {
     console.log('this is a route specific middleware that calls the handlePatchProfileRequest request handler for the profile route');
     next();
 }
 
-const handledeleteRequest = (req, res, next) => {
+const  profileRouteSpecificMiddlewareDel = (req, res, next) => {
     console.log('this is a route specific middleware that calls the handleDeleteProfileRequest request handler to delete the profile on the profile route');
     next();
 }
 
-// server.use(handleAllRequest);
+// server.use(middlewareFunction);
 
 //routes
-server.get('/login', handleLoginRequest, handleGetLoginRequest);
-server.post('/signup', handlePostRequest, handlePostSignUpRequest);
-server.patch('/profile', handlePatchRequest, handlePatchProfileRequest);
-server.delete('/profile', handledeleteRequest, handleDeleteProfileRequest);
+server.get('/login', loginRouteSpecificMiddleware, handleGetLoginRequest);
+server.post('/signup', signupRouteSpecificMiddleware, handlePostSignUpRequest);
+server.patch('/profile', profileRouteSpecificMiddleware, handlePatchProfileRequest);
+server.delete('/profile', profileRouteSpecificMiddlewareDel, handleDeleteProfileRequest);
 
 //starting the server
 server.listen(3000, () => console.log('server is up and running'))
